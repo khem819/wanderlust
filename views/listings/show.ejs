@@ -1,0 +1,236 @@
+<% layout("/layouts/boilerplate") -%>
+
+<div class="row mt-3 justify-content-center">
+    <div class="col-md-8">
+
+    <h3><%= listing.title %></h3>
+
+    <div class="card listing-card">
+        <% if (listing.image?.url) { %>
+            <img
+                src="<%= listing.image.url %>"
+                class="card-img-top show-img"
+                alt="listing_image"
+            >
+        <% } %>
+
+        <div class="card-body">
+            <p class="card-text">Owned by : <i><%= listing.owner ? listing.owner.username : "Unknown" %></i></p>
+            <p class="card-text"><i><%= listing.description %></i></p>
+              <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
+                <p class="card-text"><%= listing.location %></p>
+                <p class="card-text"><%= listing.country %></p>
+        </div>
+    </div>
+
+    <!-- Edit & Delete Buttons -->
+
+     <% if(currUser && listing.owner && listing.owner._id.equals(currUser._id)){ %> 
+
+
+    <div class="mt-3 d-flex gap-2">
+
+        <a 
+            href="/listings/<%= listing._id %>/edit" 
+            class="btn btn-dark"
+        >
+            Edit
+        </a>
+
+        <form 
+            method="POST" 
+            action="/listings/<%= listing._id %>?_method=DELETE"
+        >
+            <button type="submit" class="btn btn-danger">
+                Delete
+            </button>
+        </form>
+
+    </div>
+
+
+   
+
+<hr>
+  
+<% } %>
+
+<% if(currUser) { %>
+    <!-- Review Section -->
+    <div class="review-section mt-5">
+
+        <!-- ================= REVIEW FORM ================= -->
+        <h4 class="review-section-title">
+            <i class="fa-solid fa-pen-to-square me-2"></i>Leave a Review
+        </h4>
+
+        <div class="review-form-card mt-3">
+            <form 
+                action="/listings/<%= listing._id %>/reviews" 
+                method="POST"
+                class="needs-validation"
+            >
+
+                <!-- Rating -->
+                <div class="mb-4">
+                    <label class="form-label review-label">
+                        Your Rating
+                    </label>
+
+                    <div class="star-rating" id="star-rating">
+                        <input type="hidden" id="rating" name="review[rating]" value="0">
+                        <i class="fa-solid fa-star star-icon" data-value="1"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="2"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="3"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="4"></i>
+                        <i class="fa-solid fa-star star-icon" data-value="5"></i>
+                        <span class="rating-caption ms-2" id="rating-caption">Select a rating</span>
+                    </div>
+                </div>
+
+                <!-- Comment -->
+                <div class="mb-4">
+                    <label for="comment" class="form-label review-label">
+                        Your Comment
+                    </label>
+
+                    <textarea 
+                        name="review[comment]" 
+                        id="comment" 
+                        rows="4"
+                        class="form-control review-textarea"
+                        placeholder="Share your experience — what did you like or dislike? (min 5 characters)"
+                        required
+                    ></textarea>
+                </div>
+
+                    <button type="submit" class="btn review-submit-btn" id="review-submit-btn">
+                    <i class="fa-solid fa-paper-plane me-2"></i>Submit Review
+                </button>
+
+            </form>
+        </div>
+
+    <% } %>
+    
+        <!-- ================= REVIEWS LIST ================= -->
+        <hr class="review-divider" />
+
+        <div class="d-flex align-items-center reviews-heading">
+            <h4 class="review-section-title mb-0">
+                <i class="fa-solid fa-comments me-2"></i>All Reviews
+            </h4>
+            <span class="reviews-count">
+                <%= listing.reviews.length %> review<%= listing.reviews.length === 1 ? "" : "s" %>
+            </span>
+        </div>
+
+        <div class="row reviews-grid mt-3"> 
+
+<% for(review of listing.reviews) { %>
+            <div class="col-md-6 mb-3">
+                <div class="review-box">
+                    <div class="review-card-header">
+                        <div class="review-avatar">
+                            <%= "Traveler" %>
+                        </div>
+                        <div class="review-meta">
+                            <h6 class="review-author mb-0"><%= review.author.username %></h6>
+                            <div class="review-stars">
+                                <% for(let i = 1; i <= 5; i++) { %>
+                                    <i class="fa-<%= i <= review.rating ? 'solid' : 'regular' %> fa-star star-icon"></i>
+                                <% } %>
+                            </div>
+                        </div>
+                        <span class="review-date">
+                            <i class="fa-regular fa-calendar me-1"></i>
+                            <%= review.createdAt ? review.createdAt.toLocaleDateString("en-IN", { day: 'numeric', month: 'short', year: 'numeric' }) : "Recently" %>
+                        </span>
+                    </div>
+                    <p class="review-comment mt-2 mb-0">
+                        <i class="fa-solid fa-quote-left quote-icon"></i>
+                        <%= review.comment %>
+                    </p>
+               
+<form  class="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                    <button type="submit" class="btn btn-sm btn-dark ">Delete</button>
+                </form>
+                 
+                </div>
+            </div>
+   <% } %>
+
+    </div>
+    </div>
+
+    <div class="col-6 offset-3 mb-3">
+        <h3>Where you'll be</h3>
+        <div id="map" data-map-token="<%= mapToken || '' %>" data-map-place="<%= listing.location %>, <%= listing.country %>"></div>
+     </div>
+</div>
+</div>
+
+
+<script src="/js/map.js"></script>
+
+
+<!-- Star Rating Interaction Script -->
+<script>
+    (function () {
+        const stars = document.querySelectorAll("#star-rating .star-icon");
+        const caption = document.getElementById("rating-caption");
+        const hidden = document.getElementById("rating");
+        const starRating = document.getElementById("star-rating");
+
+        if (!starRating) {
+            return;
+        }
+
+        const captions = {
+            0: "Select a rating",
+            1: "Very Poor",
+            2: "Poor",
+            3: "Good",
+            4: "Very Good",
+            5: "Excellent"
+        };
+
+        function setFill(active) {
+            stars.forEach((star, idx) => {
+                star.classList.toggle("filled", idx < active);
+            });
+        }
+
+        stars.forEach(star => {
+            star.addEventListener("mouseenter", () => {
+                setFill(parseInt(star.dataset.value, 10));
+            });
+
+            star.addEventListener("click", () => {
+                const val = parseInt(star.dataset.value, 10);
+                hidden.value = val;
+                setFill(val);
+                caption.textContent = captions[val];
+            });
+        });
+
+        starRating.addEventListener("mouseleave", () => {
+            const current = parseInt(hidden.value, 10);
+            setFill(current);
+            caption.textContent = captions[current];
+        });
+
+        // Prevent submitting without a rating selected
+        const form = document.querySelector(".needs-validation");
+        if (form) {
+            form.addEventListener("submit", (e) => {
+                if (parseInt(hidden.value, 10) < 1) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    caption.textContent = "Please select a rating!";
+                    caption.style.color = "#dc3545";
+                }
+            });
+        }
+    })();
+</script>

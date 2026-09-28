@@ -1,0 +1,352 @@
+body{
+    font-family: "plus jakarta sans",sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+.container{
+    flex: 1;
+}
+
+/* navbar */
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color:red;
+    font-size: 2rem;
+}
+
+.nav-link{
+   color: #222 !important ; 
+}
+
+/* footer */
+.f-info{
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.f-info-socials,
+.f-info-links,
+.f-info-brand{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-info-socials i{
+    font-size: 1.4rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    color: black !important;
+}
+
+.f-info-links a{
+    text-decoration: none;
+    color: black;
+    margin: 0 0.5rem;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+
+/* cards */
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width:100% !important ;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text p{
+    font-weight:400 ;
+}
+
+ .listing-link {
+  text-decoration: none;  
+}
+
+/* Card effect */
+.card-img-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+} 
+
+/* add button */
+.add-btn{
+ background-color: blue !important;
+ border: none !important;
+}
+
+/* edit button */
+.edit-btn{
+ background-color: red !important;
+ border: none !important;
+}
+
+
+/* show page */
+.show-img{
+    height: 40vh;
+}
+
+/* ============================
+   REVIEW SECTION - MODERN STYLE
+   ============================ */
+
+.review-section-title {
+    font-weight: 700;
+    color: #222;
+    letter-spacing: -0.3px;
+}
+
+/* ---- Review form card ---- */
+.review-form-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fc 100%);
+    border: 1px solid #e6e9ef;
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    box-shadow: 0 8px 24px rgba(23, 43, 99, 0.08);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.review-form-card:focus-within {
+    border-color: #6c63ff;
+    box-shadow: 0 12px 32px rgba(108, 99, 255, 0.16);
+}
+
+.review-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.review-textarea {
+    border-radius: 0.75rem;
+    border: 1px solid #dfe3ec;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-textarea:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.15);
+}
+
+.review-submit-btn {
+    background: linear-gradient(135deg, #6c63ff 0%, #4d45e0 100%);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.6rem 1.6rem;
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 16px rgba(108, 99, 255, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-submit-btn:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(108, 99, 255, 0.45);
+}
+
+/* ---- Interactive star rating ---- */
+.star-rating {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.star-rating .star-icon {
+    font-size: 1.7rem;
+    color: #d0d5dd;
+    transition: color 0.15s ease, transform 0.15s ease;
+    padding: 0 0.1rem;
+}
+
+.star-rating .star-icon:hover {
+    transform: scale(1.2);
+}
+
+.star-rating .star-icon.filled {
+    color: #f5b301;
+    text-shadow: 0 2px 6px rgba(245, 179, 1, 0.4);
+}
+
+.rating-caption {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* ---- Reviews heading & count badage ---- */
+.reviews-heading {
+    gap: 0.75rem;
+}
+
+.reviews-count {
+    background: #6c63ff;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.85rem;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+}
+
+.review-divider {
+    border: none;
+    border-top: 2px solid #eff1f5;
+    margin: 2rem 0;
+    opacity: 1;
+}
+
+/* ---- Individual review card ---- */
+.review-box {
+    background: linear-gradient(145deg, #ffffff 0%, #fafbfe 100%);
+    border: 1px solid #e6e9ef;
+    border-radius: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    height: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(23, 43, 99, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.review-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6c63ff, #f5b301);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.review-box:hover {
+    transform: translateY(-4px);
+    border-color: #cfd6ff;
+    box-shadow: 0 14px 30px rgba(23, 43, 99, 0.12);
+}
+
+.review-box:hover::before {
+    opacity: 1;
+}
+
+/* ---- Review card header ---- */
+.review-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.review-avatar {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6c63ff, #b173ff);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+    text-transform: uppercase;
+}
+
+.review-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.review-author {
+    font-weight: 700;
+    color: #222;
+    font-size: 0.95rem;
+}
+
+.review-stars .star-icon {
+    font-size: 0.85rem;
+    color: #f5b301;
+}
+
+.review-stars .fa-regular {
+    color: #d0d5dd;
+}
+
+.review-date {
+    font-size: 0.75rem;
+    color: #8a93a6;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.review-comment {
+    color: #4b5563;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.review-comment .quote-icon {
+    color: #6c63ff;
+    opacity: 0.5;
+    margin-right: 0.35rem;
+    font-size: 0.85rem;
+}
+
+/* ---- Responsive tweaks ---- */
+@media (max-width: 576px) {
+    .review-card-header {
+        flex-wrap: wrap;
+    }
+    .review-date {
+        width: 100%;
+        margin-left: 0;
+    }
+    .review-form-card {
+        padding: 1.25rem;
+    }
+}
+
+/* map */
+
+#map{
+    height: 400px;
+    width: 100%;
+    border-radius: 1rem;
+}

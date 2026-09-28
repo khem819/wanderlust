@@ -1,0 +1,11 @@
+HTTP/1.1 302 Found
+X-Powered-By: Express
+Location: /listings/new
+Vary: Accept
+Content-Type: text/plain; charset=utf-8
+Content-Length: 35
+Set-Cookie: connect.sid=s%3A4iF0mriuP22m_gc0iLrC01R_V5RRPylo.XuBXmDvv%2BYgUyFPoPGTkDVRKg8wsHLWxTJgiRljlLy8; Path=/; Expires=Mon, 21 Sep 2026 15:51:42 GMT; HttpOnly
+Date: Mon, 14 Sep 2026 15:51:42 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
