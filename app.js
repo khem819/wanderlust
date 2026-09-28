@@ -161,6 +161,13 @@ app.use(
     userRouter
 );
 
+// ================= HOME ROUTE =================
+
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
+
 
 // ================= 404 =================
 
